@@ -13,4 +13,4 @@ Dasturdan foydalanish:
 
 0. Chiqish: agar 0 tanlansa break yordamida sikl to'xtatiladi va "Dasturdan chiqildi!" degan xabar ko'rsatiladi.
    
-8-bosqich uchun o'zgartirish kiritildi!
+8-bosqich uchun o'zgartirish kiritildi!!

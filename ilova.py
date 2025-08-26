@@ -2,6 +2,8 @@ import sqlite3
 
 class Not_id(Exception):
     pass
+class Vazifa_except(Exception):
+    pass
 
 def get_connection():
     return sqlite3.connect("info.db")
@@ -25,23 +27,29 @@ while True:
 
     def add_vazifa():
         while True:
-            matn=input("Vazifa matnini kiriting:")
-            if matn:
+            try:
+                matn=input("Vazifa matnini kiriting:")
+                if not matn.strip():
+                    raise Vazifa_except("Vazifa bo'sh bo'lishi mumkin emas!")
                 with get_connection() as conn:
                     cur=conn.cursor()
                     cur.execute("insert into vazifalar(matn) values (?)" ,(matn,))
                     conn.commit()
                     print("Vazifa saqlandi!")
-                break
-
+                    break
+            except Exception as e:
+                print(e)
+            
 
     def show_vazifalar():
         with get_connection() as conn:
             cur=conn.cursor()
             cur.execute("select * from vazifalar")
             vazifalar=cur.fetchall()
-            for _ in vazifalar:
-                print(_) 
+            print("""
+<<Vazifalar>>""")
+            for id,task in vazifalar:
+                print(f"{id}. {task}") 
         return None
 
 

@@ -12,3 +12,5 @@ Dasturdan foydalanish:
 3. Vazifani o'chirish: delete_vazifa() funksiyasi chaqiriladi va id so'raladi agar id xato kiritilsa yoki kiritilmasa shunga mos xabar beriladi va to'g'ri id kiritilguncha shu jarayon takrorlanadi, id kiritilgach agar id mavjud bo'lsa shu id ga mos vazifa o'chiriladi agar bunday id mavjuid bo'lmasa bu haqida xabar beriladi va asosiy oynaga qaytiladi.
 
 0. Chiqish: agar 0 tanlansa break yordamida sikl to'xtatiladi va "Dasturdan chiqildi!" degan xabar ko'rsatiladi.
+   
+8-bosqich uchun o'zgartirish kiritildi!

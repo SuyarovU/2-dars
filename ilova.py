@@ -1,5 +1,8 @@
 import sqlite3
 
+class Not_id(Exception):
+    pass
+
 def get_connection():
     return sqlite3.connect("info.db")
 
@@ -16,7 +19,7 @@ while True:
 2. Ro'yxatni ko'rish
 3. Vazifani o'chirish
 0. Chiqish
-    """)
+""")
 
 
 
@@ -31,6 +34,7 @@ while True:
                     print("Vazifa saqlandi!")
                 break
 
+
     def show_vazifalar():
         with get_connection() as conn:
             cur=conn.cursor()
@@ -40,11 +44,44 @@ while True:
                 print(_) 
         return None
 
+
+    def delete_vazifa():
+        try:
+            while True:
+                try:
+                    id=input("O'chirmoqchi bo'lgan vazifangiz id sini kiriting:")
+                    if not id.strip():
+                        raise Not_id("ID kiritilmagan!")
+                    elif not id.isdigit():
+                        raise Not_id("Iltimos raqam kiriting!")
+                    break
+
+                except Exception as e:
+                    print(e)
+            
+            with get_connection() as conn:
+                cur=conn.cursor()
+                cur.execute("select id from vazifalar")
+                result=[]
+                for i in cur.fetchall():
+                    result.append(i[0])
+                if not int(id) in result:
+                    raise Not_id("Bu id mavjud emas!")
+                
+                cur.execute("delete from vazifalar where id=?", (id,))
+                conn.commit()
+                print("Vazifa o'chirildi!")
+        except Exception as e:
+            print(e)
+
     if tanlov=='1':
         add_vazifa()
 
     elif tanlov=='2':
         show_vazifalar()
+    
+    elif tanlov=='3':
+        delete_vazifa()
 
 
 
